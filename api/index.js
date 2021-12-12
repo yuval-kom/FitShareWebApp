@@ -5,6 +5,8 @@ const mongoose = require("mongoose");
 const authRoute = require("./routes/auth");
 const postRoute = require("./routes/posts");
 const eventRoute = require("./routes/events");
+const categoryRoute = require("./routes/categories");
+
 
 dotenv.config();
 app.use(express.json());
@@ -32,6 +34,8 @@ mongoose.connect('mongodb+srv://yesumim:yesumim1@cluster0.pcaum.mongodb.net/myFi
 app.use("/api/auth", authRoute);
 app.use("/api/posts", postRoute);
 app.use("/api/events", eventRoute);
+app.use("/api/categories", categoryRoute);
+
 
 
 app.listen("5000", () => {

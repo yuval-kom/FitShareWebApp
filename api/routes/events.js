@@ -65,9 +65,19 @@ router.get("/:id", async (req, res) => {
 //GET ALL EVENTS
 router.get("/", async (req, res) => {
   const username = req.query.user;
+  const catName = req.query.cat;
+
   try {
     let events;
-      events = await Event.find();
+      if (catName) {
+        events = await Event.find({
+        categories: {
+            $in: [catName],
+          },
+        });
+      } else {
+        events = await Event.find();
+      }
     res.status(200).json(events);
   } catch (err) {
     res.status(500).json(err);

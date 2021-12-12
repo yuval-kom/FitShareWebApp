@@ -19,14 +19,9 @@ export default function TopBar() {
       <div className="topCenter">
         <ul className="topList">
           <li className="topListItem">
-            {user ?
             <Link className="link" to="/">
-              HOME
-            </Link>:
-            <Link className="link" to="/login">
-            
-          </Link>
-}
+               HOME
+            </Link>
           </li>
          
           <li className="topListItem">
