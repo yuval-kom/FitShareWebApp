@@ -44,14 +44,16 @@ export default function Login() {
         <button className="loginButton" type="submit" disabled={isFetching}>
           Login
         </button>
-      <h6 className="register_message"> if you dont have any account please register: </h6>
+        <h6 className="register_message">
+          {" "}
+          if you dont have any account please register:{" "}
+        </h6>
         <button className="loginRegisterButton">
-        <Link className="link" to="/register">
-          Register
-        </Link>
-      </button>
+          <Link className="link" to="/register">
+            Register
+          </Link>
+        </button>
       </form>
-     
     </div>
   );
 }

@@ -9,7 +9,9 @@
   font-family: "Josefin Sans", sans-serif;
   z-index: 999;
 }
-
+.topLeft {
+  color: rgb(44, 129, 209);
+}
 .topLeft,
 .topRight {
   flex: 3;
@@ -57,4 +59,13 @@
   color: #666;
   cursor: pointer;
   margin-left: 15px;
+}
+
+.personInfo {
+  border: none;
+  background-color: transparent;
+}
+
+.optionsList {
+  list-style-type: none;
 }
