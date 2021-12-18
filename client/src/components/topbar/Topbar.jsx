@@ -34,6 +34,12 @@ export default function TopBar() {
             </Link>
           </li>
           <li className="topListItem">
+            <Link className="link" to="/write">
+              {user && <img src={compassicon} alt="compassicon" />}
+            </Link>
+          </li>
+
+          <li className="topListItem">
             <nav>
               <button
                 className="personInfo"

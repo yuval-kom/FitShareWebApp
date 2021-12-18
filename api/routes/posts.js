@@ -62,9 +62,21 @@ router.get("/:id", async (req, res) => {
 //GET ALL POSTS
 router.get("/", async (req, res) => {
   const username = req.query.user;
+  const catName = req.query.cat;
+
   try {
     let posts;
-    posts = await Post.find();
+    if (username) {
+      posts = await Post.find({ username });
+    } else if (catName) {
+      posts = await Post.find({
+        tag: {
+          $in: [catName],
+        },
+      });
+    } else {
+      posts = await Post.find();
+    }
     res.status(200).json(posts);
   } catch (err) {
     res.status(500).json(err);
@@ -81,6 +93,23 @@ router.put("/:id/like", async (req, res) => {
     } else {
       await post.updateOne({ $pull: { likes: req.body.userId } });
       res.status(200).json("The post has been disliked");
+    }
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+
+//join / unjoin group
+router.put("/:id/join", async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+    if (!post.participents.includes(req.body.username)) {
+      await post.updateOne({ $push: { participents: req.body.username } });
+      res.status(200).json("The post has been joined");
+    } else {
+     await post.updateOne({ $pull: { participents: req.body.username } });
+      res.status(200).json("The post has been unjoined");
     }
   } catch (err) {
     res.status(500).json(err);

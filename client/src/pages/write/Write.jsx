@@ -6,7 +6,12 @@ import { Context } from "../../context/Context";
 export default function Write() {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
+  const [tag, setTag] = useState("");
+
   const { user } = useContext(Context);
+
+  
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -14,10 +19,15 @@ export default function Write() {
       username: user.username,
       title,
       desc,
+      tag,
+      participents: [user.username],  // by default the creator is participent
     };
     try {
       const res = await axios.post("/posts", newPost);
-      window.location.replace("/post/" + res.data._id);
+      try { await axios.post("/categories", {name: tag}); 
+      window.location.replace("/post/" + res.data._id);}
+      catch(err){}
+
     } catch (err) {}
   };
   return (
@@ -33,6 +43,16 @@ export default function Write() {
             className="writeInput"
             autoFocus={true}
             onChange={(e)=>setTitle(e.target.value)}
+          />
+        </div>
+        <div className="writeTag">
+      
+          <input
+            type="text"
+            placeholder="Tag"
+            className="writeInput"
+            autoFocus={true}
+            onChange={(e)=>setTag(e.target.value)}
           />
         </div>
         <div className="writeFormGroup">

@@ -18,6 +18,12 @@ import "./singlePost.css";
   const [likes, setLikes] = useState("");
   const [like, setLike] = useState("");
   const [isLiked, setIsLiked] = useState(false);
+  const [isJoined, setIsJoined]  = useState(false);
+  const [tag, setTag] = useState("");
+  const[participents, set_participents]= useState([]);
+  const[n_participents, set_n_participents]= useState(0);
+
+
 
    
   useEffect(() => {
@@ -29,22 +35,43 @@ import "./singlePost.css";
       setLikes(res.data.likes);
       setAuthor(res.data.username);
       setDate(res.data.createdAt);
+      setTag(res.data.tag);
+      set_participents(res.data.participents);
+      set_n_participents(participents.length);
+
 
     };
     getPost();
   }, [path]);
 
 
+/*
   useEffect(() => {
     setIsLiked(likes.includes(currentUser._id));
     console.log(likes);
   }, [currentUser._id, likes]);
 
   useEffect(() => {
-    setLike(likes.length);
+    setIsJoined(participents.includes(currentUser.username));
+    console.log(participents);
+  }, [currentUser.username, participents]);
+  */
+  /*
+  useEffect(() => {
+    set_n_participents(participents.length);
     console.log(like);
-  }, [ likes]);
+  }, [ participents]);
+  */ 
+  useEffect(() => {
+    setIsLiked(likes.includes(currentUser._id));
+    setIsJoined(participents.includes(currentUser.username));
+    setLike(likes.length);
+    set_n_participents(participents.length);
+    console.log(n_participents);
+  }, [currentUser._id, likes, currentUser.username, participents]);
+
   
+
   
   const likeHandler = async () => {
     try {
@@ -55,6 +82,15 @@ import "./singlePost.css";
 
   };
 
+  const handlejoin = async ()=> {
+    if(author !== currentUser.username){
+      try {
+        axios.put("/posts/" + path+ "/join", { username: currentUser.username});
+       } catch (err) {}
+      set_n_participents (isJoined  ? n_participents - 1 : n_participents + 1);
+      setIsJoined(!isJoined);
+   }
+  };
 
   const handleDelete = async () => {
     try {
@@ -128,6 +164,24 @@ import "./singlePost.css";
             Author:
               <b> {author}</b>
           </span>
+          {updateMode ? (<input
+            type="text"
+            value={tag}
+            className="singlePostTaginput"
+            autoFocus
+            onChange={(e) => setTag(e.target.value)}
+          />)
+         : (<span>
+          Tag: 
+          <Link to={`/?cat=${tag}`} className="link">
+          <b> #{tag}</b>
+            </Link>
+          </span>
+         )}
+          <i className="singleJoinIcon fab fa-angellist"
+               onClick={handlejoin} >  join</i>
+                <span>participents: {n_participents} 
+              </span>
           <span className="singlePostDate">
             {new Date(date).toDateString()}
           </span>

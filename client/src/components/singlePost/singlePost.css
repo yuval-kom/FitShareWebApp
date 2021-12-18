@@ -51,6 +51,10 @@
   color: teal;
 }
 
+.singleJoinIcon{
+  color: cornflowerblue;
+}
+
 .singlePostIcon:last-child {
   color: tomato;
 }
@@ -62,8 +66,22 @@
   justify-content: space-between;
   font-size: 16px;
   font-family: "Varela Round", sans-serif;
-  color: #b39656;
+  color: #3ab1d5;
 }
+
+
+
+
+.joinbutton{
+  margin-bottom: 10px;
+  display: flex;
+  width: fit-content;
+  height:min-content;
+  justify-content: space-between;
+  font-size: 16px;
+  color: #3ab1d5;
+}
+
 
 .singlePostDesc {
   color: #666;

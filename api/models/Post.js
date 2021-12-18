@@ -20,6 +20,14 @@ const PostSchema = new mongoose.Schema(
       type: Array,
       default: [],
     },
+    tag: {
+      type: String,
+      default: "",
+    },
+    participents:{
+      type: Array,
+      default:[],
+    }
  
   },
   { timestamps: true }
