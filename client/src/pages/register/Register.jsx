@@ -7,6 +7,8 @@ export default function Register() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [info, setInfo] = useState("");
   //const [password2, setPassword2] = useState("");
   const [error, setError] = useState(false);
 
@@ -18,6 +20,8 @@ export default function Register() {
           username,
           email,
           password,
+          name,
+          info,
         });
         res.data && window.location.replace("/login");
       } catch (err) {
@@ -44,9 +48,16 @@ export default function Register() {
           placeholder="Enter your username..."
           onChange={(e) => setUsername(e.target.value)}
         />
-        <label>Email</label>
+        <label>Name</label>
         <input
           type="text"
+          className="registerInput"
+          placeholder="Enter your full name..."
+          onChange={(e) => setName(e.target.value)}
+        />
+        <label>Email</label>
+        <input
+          type="email"
           className="registerInput"
           placeholder="Enter your email..."
           onChange={(e) => setEmail(e.target.value)}
@@ -64,6 +75,13 @@ export default function Register() {
           className="registerInput"
           placeholder="re-enter your password..."
           onChange={(e) => compare_passwords(e.target.value)} // saves the second and compare
+        />
+        <label>about you</label>
+        <input
+          type="text"
+          className="registerInput"
+          placeholder="what are your favorite activities?"
+          onChange={(e) => setInfo(e.target.value)}
         />
         <button className="registerButton" type="submit">
           Register

@@ -24,7 +24,7 @@ function App() {
         <Route path="/login">{user ? <Home /> : <Login />}</Route>
         <Route path="/nearByEvents">{<NearByEvents />}</Route>
         <Route path="/profile">{<Profile />}</Route>
-        <Route path="/write">{user ? <Write/> : <Login />}</Route>
+        <Route path="/write">{user ? <Write /> : <Login />}</Route>
 
         <Route path="/post/:postId">
           <Single />

@@ -2,8 +2,7 @@ const router = require("express").Router();
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
 
-
-//TODO add delete function 
+//TODO add delete function
 
 //REGISTER
 router.post("/register", async (req, res) => {
@@ -23,6 +22,26 @@ router.post("/register", async (req, res) => {
   }
 });
 
+//Update User Info
+router.put("/updateinfo", async (req, res) => {
+  try {
+    const username = req.query.username;
+    console.log(username);
+    const name = req.query.name;
+    console.log(name);
+    const info = req.query.info;
+    console.log(info);
+    const user = await User.find({ username });
+    await user.updateOne({ $push: { username: username } });
+    await user.updateOne({ $push: { name: name } });
+    await user.updateOne({ $push: { info: info } });
+    res.status(200).json("updated!");
+  } catch (err) {
+    console.log("error1");
+    res.status(500).json(err);
+  }
+});
+
 //LOGIN
 router.post("/login", async (req, res) => {
   try {
@@ -35,8 +54,7 @@ router.post("/login", async (req, res) => {
     const { password, ...others } = user._doc;
     res.status(200).json(others);
   } catch (err) {
-   // res.status(500).json(err);
+    // res.status(500).json(err);
   }
 });
-
 module.exports = router;

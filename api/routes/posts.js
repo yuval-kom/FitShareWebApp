@@ -61,7 +61,7 @@ router.get("/:id", async (req, res) => {
 
 //GET ALL POSTS
 router.get("/", async (req, res) => {
-  const username = req.query.user;
+  const username = req.query.username;
   const catName = req.query.cat;
 
   try {
@@ -99,7 +99,6 @@ router.put("/:id/like", async (req, res) => {
   }
 });
 
-
 //join / unjoin group
 router.put("/:id/join", async (req, res) => {
   try {
@@ -108,7 +107,7 @@ router.put("/:id/join", async (req, res) => {
       await post.updateOne({ $push: { participents: req.body.username } });
       res.status(200).json("The post has been joined");
     } else {
-     await post.updateOne({ $pull: { participents: req.body.username } });
+      await post.updateOne({ $pull: { participents: req.body.username } });
       res.status(200).json("The post has been unjoined");
     }
   } catch (err) {
