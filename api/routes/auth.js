@@ -11,7 +11,9 @@ router.post("/register", async (req, res) => {
     const hashedPass = await bcrypt.hash(req.body.password, salt);
     const newUser = new User({
       username: req.body.username,
+      name: req.body.name,
       email: req.body.email,
+      info: req.body.info,
       password: hashedPass,
     });
 
@@ -21,6 +23,40 @@ router.post("/register", async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+
+//GET USER
+router.get("/:id", async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    res.status(200).json(user);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//UPDATE users info 
+router.put("/:id", async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    try {
+      const updatedUser = await User.findByIdAndUpdate(
+        req.params.id,
+        {
+          $set: req.body,
+        },
+        { new: true }
+      );
+      res.status(200).json(updatedUser);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+/*
 
 //Update User Info
 router.put("/updateinfo", async (req, res) => {
@@ -42,6 +78,25 @@ router.put("/updateinfo", async (req, res) => {
   }
 });
 
+
+*/
+
+//DELETE USER
+router.delete("/:id", async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    try {
+      await user.delete();
+      res.status(200).json("User has been deleted...");
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+
 //LOGIN
 router.post("/login", async (req, res) => {
   try {
@@ -57,4 +112,20 @@ router.post("/login", async (req, res) => {
     // res.status(500).json(err);
   }
 });
+
+
+
+//GET ALL USERS
+router.get("/", async (req, res) => {
+  try {
+    let users =  await User.find();
+    
+    res.status(200).json(users);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+
+
 module.exports = router;
