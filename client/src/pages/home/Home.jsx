@@ -6,14 +6,11 @@ import "./home.css";
 import axios from "axios";
 import { useLocation } from "react-router";
 import useGeoLocation from "../../hooks/useGeoLocation";
-import MapContainer from "../../components/map_container/MapContainer";
-
 
 export default function Home() {
   const [posts, setPosts] = useState([]);
   const { search } = useLocation();
   const location = useGeoLocation();
-
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -25,10 +22,12 @@ export default function Home() {
   return (
     <>
       <Header />
-      {location.loaded ? JSON.stringify(location) : "location data not available yet" }
+      {location.loaded
+        ? JSON.stringify(location)
+        : "location data not available yet"}
       <div className="home">
         <Posts posts={posts} />
-      <MapContainer/>
+
         <Sidebar />
       </div>
     </>

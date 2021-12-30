@@ -5,6 +5,7 @@ import "./nearByEvents.css";
 import axios from "axios";
 import { useLocation } from "react-router";
 import nearEvents from "../../components/nearEvents/NearEvents";
+import MapContainer from "../../components/map_container/MapContainer";
 
 export default function NearByEvents() {
   const [event, setevent] = useState([]);
@@ -22,7 +23,7 @@ export default function NearByEvents() {
     <>
       <Header />
       <div className="nearByEvents">
-        <nearEvents posts={event} />
+        <MapContainer />
       </div>
     </>
   );
