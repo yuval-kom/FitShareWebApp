@@ -1,0 +1,11 @@
+.Map{
+    height: 200px;
+    width: 50px;
+    size: 10px;
+}
+
+.nearByEvents{
+    display: flex;
+    width: 20px;
+
+}

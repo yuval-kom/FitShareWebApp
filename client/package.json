@@ -14,20 +14,23 @@
     "axios": "^0.21.4",
     "google-map-react": "^2.1.10",
     "google-maps-react": "^2.0.6",
+    "install": "^0.13.0",
     "leaflet": "^1.7.1",
+    "mapbox": "^1.0.0-beta10",
     "mapbox-gl": "^2.6.1",
+    "npm": "^8.3.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-leaflet": "^3.1.0",
     "react-map-gl": "^6.1.18",
-    "react-mapbox-gl": "^5.1.1",
-    "react-native-places-input": "^1.1.7",
-    "react-places-autocomplete": "^7.3.0",
+    "react-map-gl-geocoder": "^2.2.0",
+    "react-mapbox-gl-geocoder": "^1.1.0",
     "react-router": "^5.2.1",
     "react-router-dom": "^5.2.1",
     "react-scripts": "^4.0.3",
     "react-select": "^5.2.1",
-    "web-vitals": "^1.1.2"
+    "reactstrap": "^9.0.1",
+    "web-vitals": "^1.1.2",
+    "worker-loader": "^3.0.8"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -46,5 +49,10 @@
     "not dead",
     "not op_mini all"
   ],
-  "proxy": "http://localhost:5000/api"
+  "proxy": "http://localhost:5000/api",
+  "devDependencies": {
+    "json-loader": "^0.5.7",
+    "transform-loader": "^0.2.4",
+    "webworkify-webpack": "^1.0.6"
+  }
 }
