@@ -49,7 +49,7 @@ export default function Write() {
           />
         </div>
         <div>
-         
+          <LocationAutoComplete></LocationAutoComplete>
         </div>
         <div className="writeFormGroup">
           <textarea
