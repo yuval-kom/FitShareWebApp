@@ -5,20 +5,18 @@ import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-load
 import Geocoder from 'react-mapbox-gl-geocoder';
 
 
-mapboxgl.accessToken = 'pk.eyJ1IjoieWVzdW1pbSIsImEiOiJja3h0OGlzOHcxMGR5MnNtcDRwYmxvcmViIn0.QMw9KnE29uVzWjKSSG2WLw';
+mapboxgl.accessToken = 'pk.eyJ1Ijoicm96aXIiLCJhIjoiY2t4eXk4OTh0NDFsNjJwa295dnhuenZpeiJ9.InyVe5fMqWD45VwgODrmng';
 
 
 function MapContainer() {
   
   const mapContainer = useRef(null);
-const map = useRef(null);
-const [lng, setLng] = useState(-70.9);
-const [lat, setLat] = useState(42.35);
-const [zoom, setZoom] = useState(9);
-
-
-
-useEffect(() => {
+  const map = useRef(null);
+  const [lng, setLng] = useState(-70.9);
+  const [lat, setLat] = useState(42.35);
+  const [zoom, setZoom] = useState(9);
+   
+  useEffect(() => {
   if (map.current) return; // initialize map only once
   map.current = new mapboxgl.Map({
   container: mapContainer.current,
@@ -27,25 +25,24 @@ useEffect(() => {
   zoom: zoom
   });
   });
-
-
-
- /*    const geocoder = new MapboxGeocoder({
-    // Initialize the geocoder
-    accessToken: mapboxgl.accessToken, // Set the access token
-    mapboxgl: mapboxgl, // Set the mapbox-gl instance
-    marker: false // Do not use the default marker style
-  });  */
-  
-  // Add the geocoder to the map
-  //map.addControl(new mapboxgl.NavigationControl());
-
-  return (
    
-      <div>
-      <div ref={mapContainer} className="map-container" />
-      </div>
-      );
+  useEffect(() => {
+  if (!map.current) return; // wait for map to initialize
+  map.current.on('move', () => {
+  setLng(map.current.getCenter().lng.toFixed(4));
+  setLat(map.current.getCenter().lat.toFixed(4));
+  setZoom(map.current.getZoom().toFixed(2));
+  });
+  });
+   
+  return (
+  <div>
+  <div className="sidebar">
+  Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
+  </div>
+  <div ref={mapContainer} className="map-container" />
+  </div>
+  );
 }
 
 export default MapContainer;
