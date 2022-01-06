@@ -52,21 +52,24 @@ export default function Write() {
             onChange={(e) => setTag(e.target.value)}
           />
         </div>
+        <div className="writeFormGroup">
+          <textarea
+            placeholder="Tell about the activity..."
+            type="text"
+            className="writeInput writeText"
+            onChange={(e) => setDesc(e.target.value)}
+          ></textarea>
+        </div>
         <div>
+          <span className="locationMap">
+            please set the location on the map
+          </span>
           <LocationAutoComplete
             onChangeCoordinate={(lan, lat) => {
               setLan(lan);
               setLat(lat);
             }}
           />
-        </div>
-        <div className="writeFormGroup">
-          <textarea
-            placeholder="Tell your story..."
-            type="text"
-            className="writeInput writeText"
-            onChange={(e) => setDesc(e.target.value)}
-          ></textarea>
         </div>
         <button className="writeSubmit" type="submit">
           Publish

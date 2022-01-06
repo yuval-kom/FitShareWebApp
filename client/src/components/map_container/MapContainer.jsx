@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import ReactMapGL, { Marker, Popup } from "react-map-gl";
 import axios from "axios";
 import mapboxgl from "!mapbox-gl"; // eslint-disable-line import/no-webpack-loader-syntax
+import "./mapContainer.css";
 
 mapboxgl.accessToken =
   "pk.eyJ1Ijoicm96aXIiLCJhIjoiY2t4eXk4OTh0NDFsNjJwa295dnhuenZpeiJ9.InyVe5fMqWD45VwgODrmng";
@@ -25,9 +26,6 @@ function MapContainer() {
 
   return (
     <div>
-      <div className="sidebar">
-        Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
-      </div>
       <div ref={mapContainer} className="map-container" />
     </div>
   );

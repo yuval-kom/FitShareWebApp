@@ -49,10 +49,10 @@ function MapContainerGeo(props) {
 
   return (
     <div>
-      <div className="sidebar">
+      <div className="sidebar-loc">
         Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
       </div>
-      <div ref={mapContainer} className="map-container-geo" />
+      <div ref={mapContainer} className="map-container-loc " />
     </div>
   );
 }

@@ -46,7 +46,7 @@
 
 .writeText {
   font-size: 20px;
-  height: 100vh;
+  height: 10vh;
 }
 
 .writeSubmit {
@@ -62,11 +62,21 @@
   font-size: 16px;
 }
 
-.writeTag{
+.writeTag {
   margin-left: 150px;
   display: flex;
   align-items: center;
   font-size: 10px;
   size: 1ch;
-
+}
+.locationMap {
+  font-family: monospace;
+  color: rgb(15, 54, 126);
+  margin-left: 150px;
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  border: none;
+  padding: 20px;
+  width: 70vw;
 }
