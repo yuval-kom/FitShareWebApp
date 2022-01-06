@@ -7,6 +7,8 @@ export default function Write() {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [tag, setTag] = useState("");
+  const [lan, setLan] = useState(0);
+  const [lat, setLat] = useState(0);
 
   const { user } = useContext(Context);
 
@@ -17,6 +19,8 @@ export default function Write() {
       title,
       desc,
       tag,
+      lan,
+      lat,
       participents: [user.username], // by default the creator is participent
     };
     try {
@@ -49,7 +53,12 @@ export default function Write() {
           />
         </div>
         <div>
-          <LocationAutoComplete></LocationAutoComplete>
+          <LocationAutoComplete
+            onChangeCoordinate={(lan, lat) => {
+              setLan(lan);
+              setLat(lat);
+            }}
+          />
         </div>
         <div className="writeFormGroup">
           <textarea
@@ -59,7 +68,6 @@ export default function Write() {
             onChange={(e) => setDesc(e.target.value)}
           ></textarea>
         </div>
-
         <button className="writeSubmit" type="submit">
           Publish
         </button>

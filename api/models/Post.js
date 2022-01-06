@@ -23,6 +23,14 @@ const PostSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
+    lan: {
+      type: Number,
+      default: true,
+    },
+    lat: {
+      type: Number,
+      default: true,
+    },
     participents: {
       type: Array,
       default: [],

@@ -23,7 +23,7 @@ export default function NearByEvents() {
     <>
       <Header />
       <div className="nearByEvents">
-        <MapContainer  className="Map"  />
+        <MapContainer className="Map" />
       </div>
     </>
   );
