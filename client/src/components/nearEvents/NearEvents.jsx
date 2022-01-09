@@ -1,26 +1,38 @@
 import Post from "../post/Post";
 import "./nearEvents.css";
+import React from "react";
+import ReactMapGL, { GeolocateControl } from "react-map-gl";
 
 export default function NearEvents({ posts }) {
-  posts.map((p, index) => console.log(new Date(p.createdAt).getDay.toString));
 
-  const today = new Date();
-  const day = today.getDate();
-  const month = today.getMonth();
-  const year = today.getFullYear();
-  const hour = today.getHours();
+  const [viewport, setViewport] = React.useState({
+    longitude: -122.45,
+    latitude: 37.78,
+    zoom: 14
+  });
+
+  React.useEffect(() => {
+    navigator.geolocation.getCurrentPosition((pos) => {
+      setViewport({
+        ...viewport,
+        latitude: pos.coords.latitude,
+        longitude: pos.coords.longitude
+      });
+    });
+  }, [viewport]);
+
+
+//  posts.map((p, index) => console.log(new Date(p.createdAt).getDay.toString));
+
+// This adds the map to your page
+
+
 
   const filter_posts = posts.filter(
     (p) =>
-      p.likes.length > 1 && //likes >=2 should be fron 2 different users
-      new Date(p.createdAt).getDate() === day &&
-      new Date(p.createdAt).getFullYear() === year &&
-      new Date(p.createdAt).getMonth() === month &&
-      (hour - new Date(p.createdAt).getHours()) * 60 +
-        today.getMinutes() -
-        new Date(p.createdAt).getMinutes() <=
-        60 //past hour posts
+     (Math.abs(p.lan-viewport.longitude) < 0.5 ) && (Math.abs(p.lat - viewport.latitude) <0.5)
   );
+  console.log(viewport.longitude);
 
   //sort from the highest like
   const top_posts = filter_posts.sort(function (a, b) {
@@ -28,6 +40,7 @@ export default function NearEvents({ posts }) {
   });
 
   return (
+
     <div className="posts">
       {top_posts.map((p, index) => (
         <li key={index}>
@@ -35,6 +48,7 @@ export default function NearEvents({ posts }) {
           <Post post={p} />{" "}
         </li>
       ))}
+               
     </div>
   );
-}
+      }
